@@ -8,3 +8,15 @@ abstract class ForgotState extends Equatable {
 }
 
 class ForgotInitial extends ForgotState {}
+
+class ForgotError extends ForgotState {
+  final String message;
+  const ForgotError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class ForgotLoading extends ForgotState {}
+
+class ForgotLoaded extends ForgotState {}

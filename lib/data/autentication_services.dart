@@ -12,7 +12,8 @@ class AutenticationServices {
       _firebaseAuth.currentUser != null &&
       _firebaseAuth.currentUser?.uid != null;
 
-  Future<Map<String, dynamic>> login({required String email, required String password}) async {
+  Future<Map<String, dynamic>> login(
+      {required String email, required String password}) async {
     try {
       final user = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -62,8 +63,8 @@ class AutenticationServices {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
-    } catch (e) {
-      throw Exception(e);
+    } on FirebaseAuthException catch (e) {
+      throw FirebaseAuthException(message: e.message, code: e.code);
     }
   }
 

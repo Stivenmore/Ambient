@@ -25,7 +25,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // Context!
     PushNotificationServices.messagesStream.listen((message) {});
     super.initState();
   }
@@ -35,7 +34,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SignInAndUpCubit(AutenticationServices())),
-        BlocProvider(create: (_) => ForgotCubit())
+        BlocProvider(create: (_) => ForgotCubit(AutenticationServices()))
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

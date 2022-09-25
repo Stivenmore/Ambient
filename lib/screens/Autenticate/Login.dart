@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:ambient/domain/cubit/cubit/sign_in_and_up_cubit.dart';
+import 'package:ambient/domain/services/navitation_manage.dart';
+import 'package:ambient/screens/Autenticate/Fortgot.dart';
 import 'package:ambient/screens/Autenticate/Register.dart';
 import 'package:ambient/screens/home/Home.dart';
 import 'package:ambient/screens/utils/StreamValidator.dart';
@@ -86,8 +88,8 @@ class _LoginState extends State<Login> {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: responsive.hp(10),
+                        const SizedBox(
+                          height: 100,
                         ),
                         Image.asset('assets/autenticate/login.png'),
                         SizedBox(
@@ -120,7 +122,7 @@ class _LoginState extends State<Login> {
                                   keyboardType: TextInputType.emailAddress,
                                   onChanged: registerBloc.changeEmail,
                                   controller: email,
-                                  scrollPadding: EdgeInsets.all(0.0),
+                                  scrollPadding: const EdgeInsets.all(0.0),
                                   style: GoogleFonts.lato(
                                       textStyle: TextStyle(
                                           color: Theme.of(context).primaryColor,
@@ -172,7 +174,7 @@ class _LoginState extends State<Login> {
                                   obscureText: obstru,
                                   onChanged: registerBloc.changePassword,
                                   controller: password,
-                                  scrollPadding: EdgeInsets.all(0.0),
+                                  scrollPadding: const EdgeInsets.all(0.0),
                                   style: GoogleFonts.lato(
                                       textStyle: TextStyle(
                                           color: Theme.of(context).primaryColor,
@@ -235,7 +237,10 @@ class _LoginState extends State<Login> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                NavigatorManager.pushFadeTransition(
+                                    context: context, page: const FortGot());
+                              },
                               child: Text(
                                 '¿Olvidaste tu contraseña?',
                                 style: GoogleFonts.poppins(
@@ -263,7 +268,7 @@ class _LoginState extends State<Login> {
                                       await cubit.signInMethod(
                                           email: email.text,
                                           password: password.text);
-                                    }else {
+                                    } else {
                                       controller.reset();
                                     }
                                   },
@@ -283,10 +288,8 @@ class _LoginState extends State<Login> {
                         GestureDetector(
                           onTap: () {
                             if (cubit.state.runtimeType == SignInAndUpInitial) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Register()));
+                              NavigatorManager.pushFadeTransition(
+                                  context: context, page: const Register());
                             }
                           },
                           child: RichText(
