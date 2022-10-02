@@ -1,4 +1,4 @@
-import 'package:ambient/domain/cubit/cubit/forgot_cubit.dart';
+import 'package:ambient/domain/cubit/autentication/forgot_cubit.dart';
 import 'package:ambient/screens/utils/StreamValidator.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:ambient/screens/utils/theme.dart';

@@ -1,4 +1,5 @@
 import 'package:ambient/domain/models/user_model.dart';
+import 'package:ambient/domain/services/prefs_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,10 +18,11 @@ class AutenticationServices {
     try {
       final user = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      if (user.user!.uid != '') {
+      if (user.user!.uid.isNotEmpty) {
         final usercloud =
             await _firestore.collection('Users').doc(user.user!.uid).get();
         if (usercloud.exists) {
+          UserPreferences().token = usercloud.id;
           userModel = UserModel.fromFirebase(usercloud.data()!);
           return {"bool": true, "message": ""};
         } else {
@@ -46,6 +48,7 @@ class AutenticationServices {
             .collection('Users')
             .doc(credentials.user!.uid)
             .set({'email': email, 'name': fullname, 'password': password});
+        UserPreferences().token = credentials.user!.uid;
         userModel = UserModel.fromFirebase({
           "name": fullname,
           "email": email,
@@ -71,7 +74,23 @@ class AutenticationServices {
   Future<bool> signOut() async {
     try {
       await _firebaseAuth.signOut();
+      UserPreferences().token = "";
+      userModel = UserModel(nombre: "", email: "");
       return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<Map> getUser(String uid) async {
+    try {
+      final usercloud = await _firestore.collection('Users').doc(uid).get();
+      if (usercloud.exists) {
+        userModel = UserModel.fromFirebase(usercloud.data()!);
+        return {"bool": true, "message": ""};
+      } else {
+        return {"bool": false, "message": "Usuario no encontrado"};
+      }
     } catch (e) {
       throw Exception(e);
     }

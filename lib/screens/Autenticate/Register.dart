@@ -2,8 +2,8 @@
 
 import 'dart:async';
 
-import 'package:ambient/domain/cubit/cubit/sign_in_and_up_cubit.dart';
-import 'package:ambient/screens/home/Home.dart';
+import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
+import 'package:ambient/screens/home/Home/home.dart';
 import 'package:ambient/screens/utils/StreamValidator.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:ambient/screens/utils/theme.dart';
@@ -92,8 +92,8 @@ class _RegisterState extends State<Register> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: responsive.hp(8),
+                      const SizedBox(
+                        height: 40,
                       ),
                       Image.asset('assets/autenticate/register.png'),
                       SizedBox(

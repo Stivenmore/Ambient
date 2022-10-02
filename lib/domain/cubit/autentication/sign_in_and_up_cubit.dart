@@ -24,27 +24,33 @@ class SignInAndUpCubit extends Cubit<SignInAndUpState> {
       if (isSuccess["bool"]) {
         emit(SignInAndUpLoaded(user: _autenticationServices.userModel));
       } else {
-        emit( SignInAndUpError(message: isSuccess["message"]));
+        emit(SignInAndUpError(message: isSuccess["message"]));
       }
     } catch (e) {
       emit(SignInAndUpError(message: e.toString()));
     }
   }
 
-  Future signInMethod(
-      {required String email,
-      required String password}) async {
+  Future signInMethod({required String email, required String password}) async {
     try {
       emit(SignInAndUpLoading());
-      Map? isSuccess = await _autenticationServices.login(
-          email: email, password: password);
+      Map? isSuccess =
+          await _autenticationServices.login(email: email, password: password);
       if (isSuccess["bool"]) {
         emit(SignInAndUpLoaded(user: _autenticationServices.userModel));
       } else {
-        emit( SignInAndUpError(message: isSuccess["message"]));
+        emit(SignInAndUpError(message: isSuccess["message"]));
       }
     } catch (e) {
       emit(SignInAndUpError(message: e.toString()));
     }
+  }
+
+  Future signOutMethod() async {
+    await _autenticationServices.signOut();
+  }
+
+  void initializate() {
+    emit(SignInAndUpInitial());
   }
 }
