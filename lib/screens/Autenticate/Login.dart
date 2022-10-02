@@ -1,9 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
-import 'package:ambient/domain/cubit/cubit/sign_in_and_up_cubit.dart';
+import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
 import 'package:ambient/domain/services/navitation_manage.dart';
 import 'package:ambient/screens/Autenticate/Fortgot.dart';
 import 'package:ambient/screens/Autenticate/Register.dart';
-import 'package:ambient/screens/home/Home.dart';
+import 'package:ambient/screens/home/Home/home.dart';
 import 'package:ambient/screens/utils/StreamValidator.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:ambient/screens/utils/theme.dart';
@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                     child: Column(
                       children: [
                         const SizedBox(
-                          height: 100,
+                          height: 40,
                         ),
                         Image.asset('assets/autenticate/login.png'),
                         SizedBox(
