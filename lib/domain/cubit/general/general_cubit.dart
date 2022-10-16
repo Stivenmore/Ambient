@@ -2,7 +2,6 @@ import 'package:ambient/data/autentication_services.dart';
 import 'package:ambient/domain/models/user_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 part 'general_state.dart';
 
 class GeneralCubit extends Cubit<GeneralState> {
@@ -12,11 +11,16 @@ class GeneralCubit extends Cubit<GeneralState> {
         super(GeneralInitial());
 
   int _currentNavigation = 0;
+  int _lastNavigation = 0;
   UserModel get usermodelCubit => _autenticationServices.userModel;
   int get currentNavigation => _currentNavigation;
 
   set currentNavigation(value) {
+    _lastNavigation = _currentNavigation;
     _currentNavigation = value;
-    print(_currentNavigation);
+  }
+
+  void lastnavigation() {
+    _currentNavigation = _lastNavigation;
   }
 }

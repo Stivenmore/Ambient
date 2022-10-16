@@ -3,20 +3,14 @@ import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
 import 'package:ambient/domain/cubit/general/general_cubit.dart';
 import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/screens/Splash/splash.dart';
-import 'package:ambient/screens/home/Balance/balance.dart';
-import 'package:ambient/screens/home/Benefic/benefic.dart';
+import 'package:ambient/screens/home/Benefics/Benefics.dart';
 import 'package:ambient/screens/home/Home/home.dart';
+import 'package:ambient/screens/home/Statistics/Statistics.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NavigatorManager {
-  int currentPage = 0;
-
-  void setcurrentPage(int value) {
-    currentPage = value;
-  }
-
   static void pushFadeTransition(
       {required BuildContext context, required Widget page}) {
     Navigator.push(
@@ -55,7 +49,7 @@ class NavigatorManager {
             );
           },
         ),
-        ((route) => false));
+        ((route) => true));
   }
 
   static void pushAndRemoveFadeTransition(
@@ -77,6 +71,10 @@ class NavigatorManager {
           },
         ),
         ((route) => false));
+  }
+
+  static void ofPoPFadeTrasition({required BuildContext context}) {
+    Navigator.of(context).pop();
   }
 
   void pushAlertDialogManager(
@@ -273,12 +271,12 @@ List<Map> options = [
     "icon": Icons.star,
     "name": "Beneficios",
     "position": 1,
-    "page": const BeneficScreen()
+    "page": const BeneficsScreen()
   },
   {
     "icon": Icons.balance,
-    "name": "Balance",
+    "name": "Estadisticas",
     "position": 2,
-    "page": const BalanceScreen()
+    "page": const StatisticsScreen()
   },
 ];
