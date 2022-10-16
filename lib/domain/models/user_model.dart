@@ -1,20 +1,27 @@
+import 'package:ambient/domain/models/statistic_glob.dart';
+import 'package:ambient/domain/models/statistic_obt.dart';
+
 class UserModel {
   final String nombre;
   final String email;
-  final String? telefono;
-  final List? reciclaje;
+  final StatisticObj reciclajeObj;
+  final StatisticGlob statisticGlob;
 
   UserModel(
       {required this.nombre,
       required this.email,
-      this.telefono,
-      this.reciclaje});
+      required this.reciclajeObj,
+      required this.statisticGlob});
 
   factory UserModel.fromFirebase(Map<String, dynamic> map) {
     return UserModel(
         nombre: map["name"] as String? ?? "",
         email: map["email"] as String? ?? "",
-        telefono: "",
-        reciclaje: []);
+        reciclajeObj: StatisticObj.fromFirebase(
+          map["statistics"] as Map? ?? {},
+        ),
+        statisticGlob: StatisticGlob.fromFirebase(
+          map["GlobalStatistic"] as Map? ?? {},
+        ));
   }
 }

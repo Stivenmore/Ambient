@@ -1,8 +1,8 @@
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
-class BeneficScreen extends StatelessWidget {
-  const BeneficScreen({super.key});
+class BeneficsScreen extends StatelessWidget {
+  const BeneficsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class BeneficScreen extends StatelessWidget {
       body: SizedBox(
         height: responsive.height,
         width: responsive.width,
-        child: const Center(child: Text("Benefic")),
+        child: const Center(child: Text("Beneficios")),
       ),
     );
   }

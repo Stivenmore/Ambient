@@ -4,13 +4,13 @@ class FadeAnimation extends StatefulWidget {
   final int delay;
   final Widget child;
 
-  FadeAnimation(this.delay, this.child);
+  const FadeAnimation(this.delay, this.child, {super.key});
 
   @override
-  _FadeAnimationState createState() => _FadeAnimationState();
+  FadeAnimationState createState() => FadeAnimationState();
 }
 
-class _FadeAnimationState extends State<FadeAnimation>
+class FadeAnimationState extends State<FadeAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -32,6 +32,7 @@ class _FadeAnimationState extends State<FadeAnimation>
     _controller.forward();
   }
 
+  @override
   dispose() {
     _controller.dispose();
     super.dispose();

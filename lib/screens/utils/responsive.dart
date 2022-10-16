@@ -14,13 +14,13 @@ class Responsive {
 
   Responsive(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    this._width = size.width;
-    this._height = size.height;
+    _width = size.width;
+    _height = size.height;
 
     // c2+ a2+b2 => c = srt(a2+b2)
-    this._diagonal = math.sqrt(math.pow(_width, 2) + math.pow(_height, 2));
+    _diagonal = math.sqrt(math.pow(_width, 2) + math.pow(_height, 2));
 
-    this._isTablet = size.shortestSide >= 600;
+    _isTablet = size.shortestSide >= 600;
   }
 
   double wp(double percent) => _width * percent / 100;

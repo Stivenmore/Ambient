@@ -1,3 +1,5 @@
+import 'package:ambient/domain/models/statistic_glob.dart';
+import 'package:ambient/domain/models/statistic_obt.dart';
 import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/domain/services/prefs_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,14 +46,19 @@ class AutenticationServices {
       final credentials = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (credentials.user!.uid != '') {
-        await _firestore
-            .collection('Users')
-            .doc(credentials.user!.uid)
-            .set({'email': email, 'name': fullname, 'password': password});
+        await _firestore.collection('Users').doc(credentials.user!.uid).set({
+          'email': email,
+          'name': fullname,
+          'password': password,
+          "statistic": {},
+          "GlobalStatistic": {}
+        });
         UserPreferences().token = credentials.user!.uid;
         userModel = UserModel.fromFirebase({
           "name": fullname,
           "email": email,
+          "statistic": {},
+          "GlobalStatistic": {}
         });
         return {"bool": true, "message": ""};
       } else {
@@ -75,7 +82,11 @@ class AutenticationServices {
     try {
       await _firebaseAuth.signOut();
       UserPreferences().token = "";
-      userModel = UserModel(nombre: "", email: "");
+      userModel = UserModel(
+          nombre: "",
+          email: "",
+          reciclajeObj: StatisticObj(obj: []),
+          statisticGlob: StatisticGlob(obj: []));
       return true;
     } catch (e) {
       throw Exception(e);
