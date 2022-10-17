@@ -1,8 +1,12 @@
 import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
 import 'package:ambient/domain/cubit/general/general_cubit.dart';
 import 'package:ambient/domain/cubit/recomendations/recomendations_cubit.dart';
+import 'package:ambient/domain/cubit/recycler/recycler_cubit.dart';
+import 'package:ambient/domain/models/recycler_model.dart';
 import 'package:ambient/domain/services/navitation_manage.dart';
 import 'package:ambient/screens/home/Home/Recomendations/recomendationsList.dart';
+import 'package:ambient/screens/home/Home/Recycler/Widgets/recyclerCard.dart';
+import 'package:ambient/screens/home/Home/Recycler/recyclerList.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,15 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       context.read<RecomendationsCubit>().getRecomendations();
+      context.read<RecyclerCubit>().getRecyclerList();
     });
     timeSaludo();
     super.initState();
   }
 
   void timeSaludo() {
-    if (DateTime.now().hour > 4 && DateTime.now().hour < 12) {
+    if (DateTime.now().hour >= 4 && DateTime.now().hour < 12) {
       saludo = "Buenos dias!";
-    } else if (DateTime.now().hour == 12 && DateTime.now().hour < 18) {
+    } else if (DateTime.now().hour >= 12 && DateTime.now().hour <= 18) {
       saludo = "Buenas tardes!";
     } else {
       saludo = "Buenas noches!";
@@ -101,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(right: 25),
                         icon: const Icon(
                           Icons.auto_awesome_mosaic_sharp,
-                          color: Color(0xff0A2D65),
+                          color: Color.fromARGB(255, 93, 211, 193),
                         ),
                         onPressed: () {
                           NavigatorManager().pushAlertDialogManager(
@@ -136,7 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
               const SliverToBoxAdapter(
                 child: RecomendationsList(),
-              )
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 20,
+                ),
+              ),
+              RecyclerList(responsive: responsive)
             ],
           ),
         ),

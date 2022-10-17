@@ -12,7 +12,7 @@ class RecomendationsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 240,
       child: BlocBuilder<RecomendationsCubit, RecomendationsState>(
         builder: (context, state) {
           switch (state.runtimeType) {

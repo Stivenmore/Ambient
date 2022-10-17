@@ -5,6 +5,7 @@ import 'package:ambient/screens/utils/responsive.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class PlayerWidget extends StatefulWidget {
   final int idNotification;
@@ -43,21 +44,21 @@ class _PlayerWidgetState extends State<PlayerWidget>
               idNotification: widget.idNotification.toString(),
               nameNotification: widget.recomendationsModel.name,
               dateId: widget.idNotification,
-              endTime: DateTime.now().millisecondsSinceEpoch + 1000);
+              endTime: DateTime.now().millisecondsSinceEpoch + 500);
           break;
         case AppLifecycleState.inactive:
           PushNotificationServices.sendLocalNotification(
               idNotification: widget.idNotification.toString(),
               nameNotification: widget.recomendationsModel.name,
               dateId: widget.idNotification,
-              endTime: DateTime.now().millisecondsSinceEpoch + 1000);
+              endTime: DateTime.now().millisecondsSinceEpoch + 500);
           break;
         case AppLifecycleState.paused:
           PushNotificationServices.sendLocalNotification(
               idNotification: widget.idNotification.toString(),
               nameNotification: widget.recomendationsModel.name,
               dateId: widget.idNotification,
-              endTime: DateTime.now().millisecondsSinceEpoch + 1000);
+              endTime: DateTime.now().millisecondsSinceEpoch + 500);
           break;
         default:
       }
@@ -95,14 +96,28 @@ class _PlayerWidgetState extends State<PlayerWidget>
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    image: DecorationImage(
-                        image: NetworkImage(widget.recomendationsModel.img),
-                        fit: BoxFit.fitHeight)),
-                height: responsive.height,
-                width: responsive.width,
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                            image: NetworkImage(widget.recomendationsModel.img),
+                            fit: BoxFit.fitHeight)),
+                    height: responsive.height,
+                    width: responsive.width,
+                  ),
+                  Positioned(
+                    height: responsive.height,
+                    width: responsive.width,
+                    child: Visibility(
+                        visible: playerState == PlayerState.playing,
+                        child: SizedBox(
+                            height: 280,
+                            width: 280,
+                            child: Lottie.asset("assets/LottieButtom.json"))),
+                  ),
+                ],
               ),
               Opacity(
                 opacity: 0.5,

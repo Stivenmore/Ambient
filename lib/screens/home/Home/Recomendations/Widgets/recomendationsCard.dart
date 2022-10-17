@@ -47,8 +47,8 @@ class _RecomendationCardState extends State<RecomendationCard> {
             alignment: Alignment.bottomCenter,
             children: [
               SizedBox(
-                height: 200,
-                width: 140,
+                height: 240,
+                width: 160,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: FadeInImage(
@@ -60,9 +60,9 @@ class _RecomendationCardState extends State<RecomendationCard> {
               ),
               Container(
                 padding: const EdgeInsets.all(5),
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.bottomLeft,
                 height: 70,
-                width: 140,
+                width: 160,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(20),
@@ -77,6 +77,7 @@ class _RecomendationCardState extends State<RecomendationCard> {
                           textStyle: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
+                      maxLines: 2,
                     ),
                     Text(
                       widget.list.type,
