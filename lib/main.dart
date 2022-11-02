@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child:  const MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Rescue the ambient',
+        title: 'Ambient',
         home: Scaffold(
           body: Splash(),
         ),
