@@ -2,6 +2,7 @@ import 'package:ambient/data/autentication_services.dart';
 import 'package:ambient/domain/cubit/cubit/forgot_cubit.dart';
 import 'package:ambient/domain/cubit/cubit/sign_in_and_up_cubit.dart';
 import 'package:ambient/screens/Autenticate/Login.dart';
+import 'package:ambient/screens/Splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ambient/domain/services/push_notification_services.dart';
@@ -36,11 +37,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => SignInAndUpCubit(AutenticationServices())),
         BlocProvider(create: (_) => ForgotCubit(AutenticationServices()))
       ],
-      child: const MaterialApp(
+      child:  const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Rescue the ambient',
         home: Scaffold(
-          body: Login(),
+          body: Splash(),
         ),
       ),
     );
