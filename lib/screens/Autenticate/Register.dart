@@ -111,7 +111,7 @@ class _RegisterState extends State<Register> {
                       Text(
                         'Por favor ingrese los detalles y continue.',
                         style: GoogleFonts.poppins(
-                            textStyle: TextStyle(color: UniCode.gray2)),
+                            textStyle: TextStyle(color: UniCodes.gray2)),
                       ),
                       SizedBox(
                         height: responsive.hp(2),
@@ -131,21 +131,21 @@ class _RegisterState extends State<Register> {
                             labelText: 'Nombre completo',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: UniCode.gray2),
+                              borderSide: BorderSide(color: UniCodes.gray2),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: UniCode.gray2),
+                              borderSide: BorderSide(color: UniCodes.gray2),
                             ),
                             disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: UniCode.gray2),
+                              borderSide: BorderSide(color: UniCodes.gray2),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: UniCode.gray2),
+                              borderSide: BorderSide(color: UniCodes.gray2),
                             ),
-                            focusColor: UniCode.gray2,
-                            fillColor: UniCode.gray2,
+                            focusColor: UniCodes.gray2,
+                            fillColor: UniCodes.gray2,
                           ),
                           validator: (String? value) =>
                               value!.isEmpty ? 'Campo requerido' : null,
@@ -178,24 +178,24 @@ class _RegisterState extends State<Register> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   disabledBorder: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
-                                  focusColor: UniCode.gray2,
-                                  fillColor: UniCode.gray2,
+                                  focusColor: UniCodes.gray2,
+                                  fillColor: UniCodes.gray2,
                                 ),
                                 validator: (String? value) =>
                                     value!.isEmpty ? 'Campo requerido' : null,
@@ -248,24 +248,24 @@ class _RegisterState extends State<Register> {
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   disabledBorder: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16),
                                     borderSide:
-                                        BorderSide(color: UniCode.gray2),
+                                        BorderSide(color: UniCodes.gray2),
                                   ),
-                                  focusColor: UniCode.gray2,
-                                  fillColor: UniCode.gray2,
+                                  focusColor: UniCodes.gray2,
+                                  fillColor: UniCodes.gray2,
                                 ),
                                 validator: (String? value) =>
                                     value!.isEmpty ? 'Campo requerido' : null,

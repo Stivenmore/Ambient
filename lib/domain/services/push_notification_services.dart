@@ -1,8 +1,9 @@
+// ignore_for_file: library_prefixes
+
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -17,16 +18,13 @@ class PushNotificationServices {
   static Stream<String> get messagesStream => _messageStream.stream;
 
   static Future _backgroundHandler(RemoteMessage message) async {
-    print("background id ${message.data}");
     _messageStream.add(message.data['product'] ?? 'No data');
   }
 
   static Future _onMessageHandler(RemoteMessage message) async {
-    print("background id ${message.data}");
   }
 
   static Future _onMessageAppHandler(RemoteMessage message) async {
-    print("background id ${message.data}");
   }
 
   static Future initMessaging() async {
@@ -51,7 +49,6 @@ class PushNotificationServices {
         provisional: false,
         sound: true);
 
-    print('User push notification status ${settings.authorizationStatus}');
   }
 
   static setupLocalNotification() async {

@@ -2,6 +2,7 @@ import 'package:ambient/data/autentication_services.dart';
 import 'package:ambient/data/home_services.dart';
 import 'package:ambient/domain/cubit/autentication/forgot_cubit.dart';
 import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
+import 'package:ambient/domain/cubit/benefics/benefics_cubit.dart';
 import 'package:ambient/domain/cubit/general/general_cubit.dart';
 import 'package:ambient/domain/cubit/recomendations/recomendations_cubit.dart';
 import 'package:ambient/domain/cubit/recycler/recycler_cubit.dart';
@@ -47,7 +48,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => SplashCubit(autenticationServices)),
         BlocProvider(create: (_) => GeneralCubit(autenticationServices)),
         BlocProvider(create: (_) => RecomendationsCubit(homeServices)),
-        BlocProvider(create: (_) => RecyclerCubit(homeServices))
+        BlocProvider(create: (_) => RecyclerCubit(homeServices)),
+        BlocProvider(create: (_) => BeneficsCubit(homeServices)),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

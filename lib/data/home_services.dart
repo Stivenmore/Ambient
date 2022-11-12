@@ -1,5 +1,7 @@
+import 'package:ambient/domain/models/config_model.dart';
 import 'package:ambient/domain/models/recomendations_model.dart';
 import 'package:ambient/domain/models/recycler_model.dart';
+import 'package:ambient/domain/models/stocks_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeServices {
@@ -24,6 +26,30 @@ class HomeServices {
           .map((e) => RecyclerModel.fromFirebase(e.data()))
           .toList();
       return recyclerList;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<StockModel>> getStocks() async {
+    try {
+      final collectionAll = await _firestore.collection("Stocks").get();
+      List<StockModel> stocksList = collectionAll.docs
+          .map((e) => StockModel.fromFirebase(e.data()))
+          .toList();
+      return stocksList;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<ConfigModel>> getConfig() async {
+    try {
+      final collectionAll = await _firestore.collection("Config").get();
+      List<ConfigModel> configModel = collectionAll.docs
+          .map((e) => ConfigModel.fromFirebase(e.data()))
+          .toList();
+      return configModel;
     } catch (e) {
       throw Exception(e);
     }

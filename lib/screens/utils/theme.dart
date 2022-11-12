@@ -1,16 +1,18 @@
-
 import 'package:flutter/material.dart';
 
-class UniCode {
-  
-  static Color gray1 = Color(0xffF1F1F1);
-  static Color gray2 = Color(0xff959595);
-  static Color gray3 = Color(0xff7B7B7B);
+class UniCodes {
+  static Color gray1 = const Color(0xffF1F1F1);
+  static Color gray2 = const Color(0xff959595);
+  static Color gray3 = const Color(0xff7B7B7B);
+  static Color green = const Color.fromARGB(255, 29, 62, 17);
+  static Color blueblack = Color.fromARGB(255, 128, 128, 128);
+  static Color ligthgrey = const Color(0xffF3F1EF);
+  static Color coffee = const Color(0xffD6B7A1);
+  static Color coffee2 = const Color(0xffd9bba4);
 
-  static ThemeData defaultTheme = ThemeData(
-    primarySwatch: Colors.red,
-    accentColor: Colors.white,
-    primaryColor:Color(0xffEE0F38),
-    shadowColor: Color(0xffF3B1BC)
-  );
+  static Color blueperformance = const Color(0xff0f1223);
+  static Color orangeperformance = const Color(0xffff4b25);
+  static Color cielperformance = const Color(0xff63d9e1);
+  static Color whiteperformance = const Color(0xffffffff);
+  static Color cielbenefics = const Color(0xff47a08f);
 }

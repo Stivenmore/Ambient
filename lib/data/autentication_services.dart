@@ -4,6 +4,7 @@ import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/domain/services/prefs_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class AutenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -51,7 +52,14 @@ class AutenticationServices {
           'name': fullname,
           'password': password,
           "statistic": {},
-          "GlobalStatistic": {}
+          "GlobalStatistic": {},
+          "pointList": [
+            {
+              "point": 0,
+              "time": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+              "type": "none"
+            }
+          ]
         });
         UserPreferences().token = credentials.user!.uid;
         userModel = UserModel.fromFirebase({
@@ -85,8 +93,10 @@ class AutenticationServices {
       userModel = UserModel(
           nombre: "",
           email: "",
+          points: 0,
           reciclajeObj: StatisticObj(obj: []),
-          statisticGlob: StatisticGlob(obj: []));
+          statisticGlob: StatisticGlob(obj: []),
+          transaction: []);
       return true;
     } catch (e) {
       throw Exception(e);
