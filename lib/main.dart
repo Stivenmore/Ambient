@@ -51,9 +51,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => RecyclerCubit(homeServices)),
         BlocProvider(create: (_) => BeneficsCubit(homeServices)),
       ],
-      child: const MaterialApp(
+      child:  const MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Rescue the ambient',
+        title: 'Ambient',
         home: Scaffold(
           body: SplashScreen(),
         ),
