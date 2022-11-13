@@ -4,6 +4,7 @@ import 'package:ambient/domain/cubit/autentication/forgot_cubit.dart';
 import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
 import 'package:ambient/domain/cubit/benefics/benefics_cubit.dart';
 import 'package:ambient/domain/cubit/general/general_cubit.dart';
+import 'package:ambient/domain/cubit/howtoprepared/howtoprepared_cubit.dart';
 import 'package:ambient/domain/cubit/recomendations/recomendations_cubit.dart';
 import 'package:ambient/domain/cubit/recycler/recycler_cubit.dart';
 import 'package:ambient/domain/cubit/splash/splash_cubit.dart';
@@ -50,8 +51,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => RecomendationsCubit(homeServices)),
         BlocProvider(create: (_) => RecyclerCubit(homeServices)),
         BlocProvider(create: (_) => BeneficsCubit(homeServices)),
+        BlocProvider(create: (_) => HowtopreparedCubit(homeServices)),
       ],
-      child:  const MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ambient',
         home: Scaffold(

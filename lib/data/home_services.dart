@@ -1,4 +1,5 @@
 import 'package:ambient/domain/models/config_model.dart';
+import 'package:ambient/domain/models/howtoprepared_model.dart';
 import 'package:ambient/domain/models/recomendations_model.dart';
 import 'package:ambient/domain/models/recycler_model.dart';
 import 'package:ambient/domain/models/stocks_model.dart';
@@ -50,6 +51,33 @@ class HomeServices {
           .map((e) => ConfigModel.fromFirebase(e.data()))
           .toList();
       return configModel;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<HowToPreparedModel>> getHowToPrepared() async {
+    try {
+      final collectionAll = await _firestore.collection("howtoprepared").get();
+      List<HowToPreparedModel> howToPreparedModel = collectionAll.docs
+          .map((e) => HowToPreparedModel.fromFirebase(e.data()))
+          .toList();
+      return howToPreparedModel;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<HowToPreparedModel>> getHowToPreparedType(String type) async {
+    try {
+      final collectionAll = await _firestore
+          .collection("howtoprepared")
+          .where("type", isEqualTo: type)
+          .get();
+      List<HowToPreparedModel> howToPreparedModel = collectionAll.docs
+          .map((e) => HowToPreparedModel.fromFirebase(e.data()))
+          .toList();
+      return howToPreparedModel;
     } catch (e) {
       throw Exception(e);
     }

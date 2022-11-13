@@ -5,6 +5,7 @@ import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/screens/Splash/splash.dart';
 import 'package:ambient/screens/home/Benefics/Benefics.dart';
 import 'package:ambient/screens/home/Home/home.dart';
+import 'package:ambient/screens/home/HowToPrepared/Howtoprepared.dart';
 import 'package:ambient/screens/home/Statistics/Statistics.dart';
 import 'package:ambient/screens/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,7 @@ class NavigatorManager {
                             height: 30,
                           ),
                           SizedBox(
-                            height: responsive.height * .3,
+                            height: responsive.hp(35),
                             child: ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: options.length,
@@ -147,7 +148,7 @@ class NavigatorManager {
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20),
-                                      width: responsive.width * .55,
+                                      width: responsive.wp(55),
                                       height: 62,
                                       decoration: BoxDecoration(
                                           borderRadius:
@@ -300,4 +301,10 @@ List<Map> options = [
     "position": 2,
     "page": const StatisticsScreen()
   },
+  {
+    "icon": Icons.recycling,
+    "name": "Preparar el reciclaje",
+    "position": 3,
+    "page": const HowtopreparedScreen()
+  }
 ];

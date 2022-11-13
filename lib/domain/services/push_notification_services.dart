@@ -21,14 +21,17 @@ class PushNotificationServices {
     _messageStream.add(message.data['product'] ?? 'No data');
   }
 
-  static Future _onMessageHandler(RemoteMessage message) async {
-  }
+  static Future _onMessageHandler(RemoteMessage message) async {}
 
-  static Future _onMessageAppHandler(RemoteMessage message) async {
-  }
+  static Future _onMessageAppHandler(RemoteMessage message) async {}
 
   static Future initMessaging() async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyCrcD3qfJQRL9iAxY_RURWFjqzz8qYFP0s",
+            projectId: "ambient-ec3df",
+            messagingSenderId: "613674444074",
+            appId: "1:613674444074:android:e00cd5a7aa6f693199ea53"));
 
     token = await FirebaseMessaging.instance.getToken();
     requestPermission();
@@ -48,7 +51,6 @@ class PushNotificationServices {
         criticalAlert: false,
         provisional: false,
         sound: true);
-
   }
 
   static setupLocalNotification() async {
