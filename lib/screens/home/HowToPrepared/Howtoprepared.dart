@@ -38,32 +38,30 @@ class _HowtopreparedScreenState extends State<HowtopreparedScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: UniCodes.whiteperformance,
             leading: IconButton(
                 onPressed: () {
                   navigationCubit.lastnavigation();
                   NavigatorManager.ofPoPFadeTrasition(context: context);
                 },
-                icon: const Icon(Icons.arrow_back_ios)),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: UniCodes.cielbenefics,
+                )),
+            title: Text(
+              "Como preparar el reciclaje",
+              style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                color: UniCodes.cielbenefics,
+              )),
+            ),
+            centerTitle: true,
           ),
           body: SizedBox(
             height: responsive.height,
             width: responsive.width,
             child: ListView(
               children: [
-                SizedBox(
-                  height: 30,
-                  child: Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            navigationCubit.lastnavigation();
-                            NavigatorManager.ofPoPFadeTrasition(
-                                context: context);
-                          },
-                          icon: const Icon(Icons.arrow_back_ios))
-                    ],
-                  ),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -128,7 +126,7 @@ class _HowtopreparedScreenState extends State<HowtopreparedScreen> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: responsive.height - 200 ,
+                  height: responsive.height - 200,
                   width: responsive.width,
                   child: BlocBuilder<HowtopreparedCubit, HowtopreparedState>(
                     builder: (context, state) {
