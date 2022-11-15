@@ -45,7 +45,7 @@ class _EditPersonState extends State<EditPerson> {
           break;
         case GeneralStateUserUpdate.success:
           controller.success();
-          Future.delayed(const Duration(seconds: 2), () {
+          Future.delayed(const Duration(seconds: 1), () {
             controller.reset();
             context.read<SplashCubit>().getUser();
             context.read<GeneralCubit>().resetState();
