@@ -3,6 +3,7 @@ import 'package:ambient/domain/cubit/autentication/sign_in_and_up_cubit.dart';
 import 'package:ambient/domain/cubit/general/general_cubit.dart';
 import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/screens/Splash/splash.dart';
+import 'package:ambient/screens/home/Account/Person/person_screen.dart';
 import 'package:ambient/screens/home/Benefics/Benefics.dart';
 import 'package:ambient/screens/home/Home/home.dart';
 import 'package:ambient/screens/home/HowToPrepared/Howtoprepared.dart';
@@ -235,48 +236,54 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.withOpacity(0.5)),
-          borderRadius: BorderRadius.circular(20)),
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Icon(
-              Icons.person,
-              color: Colors.grey[700],
+    return InkWell(
+      onTap: () {
+        NavigatorManager.pushFadeTransition(
+            context: context, page: UserScreen(userModel: userModel));
+      },
+      child: Container(
+        height: 70,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.withOpacity(0.5)),
+            borderRadius: BorderRadius.circular(20)),
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Icon(
+                Icons.person,
+                color: Colors.grey[700],
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  userModel.nombre.substring(
-                      0,
-                      userModel.nombre.length >= 24
-                          ? (24 - 1)
-                          : userModel.nombre.length),
-                  style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                ),
-                Text(
-                  userModel.email,
-                  maxLines: 1,
-                )
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userModel.nombre.substring(
+                        0,
+                        userModel.nombre.length >= 24
+                            ? (24 - 1)
+                            : userModel.nombre.length),
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+                    maxLines: 1,
+                  ),
+                  Text(
+                    userModel.email,
+                    maxLines: 1,
+                  )
+                ],
+              ),
             ),
-          ),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.arrow_drop_down_outlined))
-        ],
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.arrow_drop_down_outlined))
+          ],
+        ),
       ),
     );
   }

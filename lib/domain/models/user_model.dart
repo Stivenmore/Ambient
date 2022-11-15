@@ -2,37 +2,82 @@ import 'package:ambient/domain/models/statistic_glob.dart';
 import 'package:ambient/domain/models/statistic_obt.dart';
 import 'package:ambient/screens/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UserModel {
-  final String nombre;
+  String nombre;
   final String email;
-  final int points;
+  final String? dayregister;
+  final String? monthregister;
+  final String? yearsregister;
+  final String? lastlogin;
+  final String img;
+  final String? id;
+  bool? activate;
   final List<Transaction> transaction;
+  final List<RecyclerModel> recycler;
+  final List<Point> points;
+  String phone;
+  String address;
   final StatisticObj reciclajeObj;
   final StatisticGlob statisticGlob;
 
-  UserModel(
-      {required this.nombre,
-      required this.email,
-      required this.reciclajeObj,
-      required this.statisticGlob,
-      required this.points,
-      required this.transaction});
+  UserModel({
+    required this.nombre,
+    required this.email,
+    required this.transaction,
+    this.img =
+        'https://firebasestorage.googleapis.com/v0/b/ambient-ec3df.appspot.com/o/Img%2Fno-image.jpg?alt=media&token=cc289889-ea88-48a7-86ce-00e0ac3ce197',
+    this.dayregister,
+    this.lastlogin,
+    this.monthregister,
+    this.yearsregister,
+    required this.recycler,
+    required this.id,
+    required this.points,
+    this.activate = false,
+    required this.address,
+    required this.phone,
+    required this.reciclajeObj,
+    required this.statisticGlob,
+  });
 
   factory UserModel.fromFirebase(Map<String, dynamic> map) {
     return UserModel(
-        nombre: map["name"] as String? ?? "",
-        email: map["email"] as String? ?? "",
-        points: map["point"] as int? ?? 0,
-        reciclajeObj: StatisticObj.fromFirebase(
-          map["statistics"] as Map? ?? {},
-        ),
-        statisticGlob: StatisticGlob.fromFirebase(
-          map["GlobalStatistic"] as Map? ?? {},
-        ),
-        transaction: (map["pointList"] as Iterable)
-            .map((e) => Transaction.fromJson(e))
-            .toList());
+      nombre: map["name"] as String? ?? "",
+      email: map["email"] as String? ?? "",
+      img: map["img"] as String? ??
+          "https://firebasestorage.googleapis.com/v0/b/ambient-ec3df.appspot.com/o/Img%2Fno-image.jpg?alt=media&token=cc289889-ea88-48a7-86ce-00e0ac3ce197",
+      dayregister: map["dayregister"] as String? ?? "",
+      monthregister: map["monthregister"] as String? ?? "",
+      yearsregister: map["yearsregister"] as String? ?? "",
+      lastlogin: map["lastlogin"] as String? ?? "",
+      transaction: map["pointList"] != null
+          ? (map["pointList"] as Iterable)
+              .map((e) => Transaction.fromJson(e))
+              .toList()
+          : <Transaction>[],
+      recycler: map["recycler"] != null
+          ? (map["recycler"] as Iterable)
+              .map((e) => RecyclerModel.fromJson(e))
+              .toList()
+          : <RecyclerModel>[],
+      id: map["id"] as String? ?? "",
+      activate: map["activate"] ?? false,
+      points: map["pointList"] != null
+          ? (map["pointList"] as Iterable)
+              .map((e) => Point.fromJson(e))
+              .toList()
+          : <Point>[],
+      phone: map["phone"] as String? ?? "Telefono...",
+      address: map["address"] as String? ?? "Direccion...",
+      reciclajeObj: StatisticObj.fromFirebase(
+        map["statistics"] as Map? ?? {},
+      ),
+      statisticGlob: StatisticGlob.fromFirebase(
+        map["GlobalStatistic"] as Map? ?? {},
+      ),
+    );
   }
 }
 
@@ -74,5 +119,52 @@ class Transaction {
         time: map["time"] as String? ?? "",
         icon: type[(map["type"] as String? ?? "none")]!,
         color: color[(map["type"] as String? ?? "none")]!);
+  }
+}
+
+class RecyclerModel {
+  final String time;
+  final int carton;
+  final int metal;
+  final int papel;
+  final int plastico;
+  final int vidrio;
+  bool isExpanded;
+
+  RecyclerModel(
+      {required this.time,
+      required this.carton,
+      required this.metal,
+      required this.papel,
+      required this.plastico,
+      required this.vidrio,
+      this.isExpanded = false});
+
+  factory RecyclerModel.fromJson(Map map) {
+    return RecyclerModel(
+      carton: map["carton"] as int? ?? 0,
+      metal: map["metal"] as int? ?? 0,
+      papel: map["papel"] as int? ?? 0,
+      plastico: map["plastico"] as int? ?? 0,
+      vidrio: map["vidrio"] as int? ?? 0,
+      time: map["time"] as String? ?? "...",
+    );
+  }
+}
+
+class Point {
+  final String time;
+  final int point;
+  final String type;
+
+  Point({required this.time, required this.point, required this.type});
+
+  factory Point.fromJson(Map map) {
+    return Point(
+      point: map["point"] as int? ?? 0,
+      type: map["type"] as String? ?? "none",
+      time: map["time"] as String? ??
+          DateFormat('yyyy-MM-dd').format(DateTime.now()),
+    );
   }
 }

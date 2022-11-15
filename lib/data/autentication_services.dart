@@ -4,11 +4,14 @@ import 'package:ambient/domain/models/user_model.dart';
 import 'package:ambient/domain/services/prefs_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class AutenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
   late UserModel userModel;
   String get userUid => _firebaseAuth.currentUser!.uid;
 
@@ -24,9 +27,14 @@ class AutenticationServices {
       if (user.user!.uid.isNotEmpty) {
         final usercloud =
             await _firestore.collection('Users').doc(user.user!.uid).get();
+        await _firestore.collection('Users').doc(user.user!.uid).set({
+          "lastlogin": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+        }, SetOptions(merge: true));
         if (usercloud.exists) {
           UserPreferences().token = usercloud.id;
-          userModel = UserModel.fromFirebase(usercloud.data()!);
+          Map<String, dynamic> newmap = usercloud.data()!;
+          newmap.addAll({"id": user.user!.uid});
+          userModel = UserModel.fromFirebase(newmap);
           return {"bool": true, "message": ""};
         } else {
           return {"bool": false, "message": "Usuario no encontrado"};
@@ -91,12 +99,35 @@ class AutenticationServices {
       await _firebaseAuth.signOut();
       UserPreferences().token = "";
       userModel = UserModel(
+          points: <Point>[],
           nombre: "",
           email: "",
-          points: 0,
           reciclajeObj: StatisticObj(obj: []),
           statisticGlob: StatisticGlob(obj: []),
-          transaction: []);
+          transaction: [],
+          recycler: <RecyclerModel>[],
+          id: "",
+          phone: "",
+          address: "");
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future updateUser(
+      {required String addres,
+      required String name,
+      required String phone,
+      required String id,
+      required bool activate}) async {
+    try {
+      await _firestore.collection("Users").doc(id).set({
+        "address": addres,
+        "phone": phone,
+        "name": name,
+        "activate": activate
+      }, SetOptions(merge: true));
       return true;
     } catch (e) {
       throw Exception(e);
@@ -106,8 +137,13 @@ class AutenticationServices {
   Future<Map> getUser(String uid) async {
     try {
       final usercloud = await _firestore.collection('Users').doc(uid).get();
+      await _firestore.collection('Users').doc(uid).set({
+        "lastlogin": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+      }, SetOptions(merge: true));
       if (usercloud.exists) {
-        userModel = UserModel.fromFirebase(usercloud.data()!);
+        Map<String, dynamic> newmap = usercloud.data()!;
+        newmap.addAll({"id": uid});
+        userModel = UserModel.fromFirebase(newmap);
         return {"bool": true, "message": ""};
       } else {
         return {"bool": false, "message": "Usuario no encontrado"};
@@ -115,5 +151,18 @@ class AutenticationServices {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  Future setImage({required String name, required Uint8List fileBytes}) async {
+    final postImageRef = _storage.ref("users");
+    late String state;
+    final UploadTask uploadTask = postImageRef
+        .child("${DateTime.now().millisecondsSinceEpoch}.jpeg")
+        .putData(
+            fileBytes,
+            SettableMetadata(
+              contentType: 'image/jpeg',
+            ));
+    return await (await uploadTask).ref.getDownloadURL();
   }
 }

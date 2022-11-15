@@ -34,13 +34,13 @@ dependencies:
   firebase_auth: ^3.8.0
   firebase_core: ^1.22.0
   firebase_messaging: ^13.0.1
-  video_player: ^2.4.7
-  youtube_player_flutter: ^8.1.1
+  firebase_storage: null
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_local_notifications: ^12.0.2
   google_fonts: ^3.0.1
+  image_picker: ^0.8.6
   intl: ^0.17.0
   lottie: ^1.4.3
   rounded_loading_button: ^2.1.0
@@ -49,6 +49,8 @@ dependencies:
   shimmer: ^2.0.0
   syncfusion_flutter_charts: ^20.3.48
   timezone: ^0.9.0
+  video_player: ^2.4.7
+  youtube_player_flutter: ^8.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

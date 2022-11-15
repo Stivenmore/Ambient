@@ -72,7 +72,7 @@ class _BeneficsScreenState extends State<BeneficsScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: Text(
-                          "${usermodel.points.toString()}P",
+                          "${usermodel.transaction.last.point.toString()}P",
                           style: GoogleFonts.roboto(
                               textStyle: TextStyle(
                                   color: UniCodes.cielbenefics,
