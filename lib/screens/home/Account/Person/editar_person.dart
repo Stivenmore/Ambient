@@ -20,14 +20,17 @@ class EditPerson extends StatefulWidget {
 class _EditPersonState extends State<EditPerson> {
   final RoundedLoadingButtonController controller =
       RoundedLoadingButtonController();
-  TextEditingController name = TextEditingController();
-  TextEditingController address = TextEditingController();
+  late TextEditingController name;
+  late TextEditingController address;
   TextEditingController phone = TextEditingController();
   late UserModel local;
 
   @override
   void initState() {
     local = widget.user;
+    name = TextEditingController(text: local.nombre);
+    phone = TextEditingController(text: local.phone);
+    address = TextEditingController(text: local.address);
     super.initState();
   }
 
