@@ -33,6 +33,12 @@ class _LoginState extends State<Login> {
   bool obstru = true;
 
   @override
+  void initState() {
+    context.read<SignInAndUpCubit>().initializate();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive(context);
     SignInAndUpCubit cubit = context.watch<SignInAndUpCubit>();
@@ -51,6 +57,7 @@ class _LoginState extends State<Login> {
               break;
             case SignInAndUpLoaded:
               controller.success();
+              context.read<SignInAndUpCubit>().initializate();
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -58,9 +65,10 @@ class _LoginState extends State<Login> {
               break;
             case SignInAndUpError:
               controller.error();
+              context.read<SignInAndUpCubit>().initializate();
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   duration: _seconds,
-                  content: Text(state.props[0] as String? ?? "")));
+                  content: Text(state.props[0] as String? ?? "Error")));
               Future.delayed(_seconds, () {
                 controller.reset();
               });
